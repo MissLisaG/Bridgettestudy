@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 2 - Study Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Study Hub</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="videos.html" class="nav-link">Videos</a></li>
+                <li><a href="downloads.html" class="nav-link">Downloads</a></li>
+                <li><a href="links.html" class="nav-link">Useful Links</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Password Protection -->
+        <div id="passwordSection" class="password-container">
+            <h2>🔒 Class 2 Access</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 1.5rem;">
+                Enter the class password to access materials
+            </p>
+            <form class="password-form" onsubmit="checkPassword(event)">
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    placeholder="Enter password"
+                    autocomplete="off"
+                >
+                <p id="errorMessage" class="error-message">Incorrect password. Please try again.</p>
+                <button type="submit" class="btn">Access Class</button>
+            </form>
+        </div>
+
+        <!-- Protected Content -->
+        <div id="protectedContent" class="protected-content">
+            <div class="hero">
+                <h1>✍️ Class 2 Resources</h1>
+                <p>Welcome to your class materials and assignments</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Current Assignments</h2>
+                <p>Check here regularly for homework and project updates.</p>
+                
+                <div class="download-list">
+                    <div class="download-item">
+                        <div class="download-info">
+                            <h4>Assignment 1: Reading Analysis</h4>
+                            <p>Due: [Add date] • Format: PDF</p>
+                        </div>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="download-item">
+                        <div class="download-info">
+                            <h4>Assignment 2: Writing Task</h4>
+                            <p>Due: [Add date] • Format: DOCX</p>
+                        </div>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Class Materials</h2>
+                <p>Access lesson notes, worksheets, and study guides.</p>
+                
+                <div class="download-list">
+                    <div class="download-item">
+                        <div class="download-info">
+                            <h4>Week 1-2 Study Guide</h4>
+                            <p>Topic: Introduction • Format: PDF</p>
+                        </div>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="download-item">
+                        <div class="download-info">
+                            <h4>Practice Worksheets</h4>
+                            <p>Collection of exercises • Format: ZIP</p>
+                        </div>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Announcements</h2>
+                <p><strong>Latest Update:</strong> Welcome to Class 2! Check back here for important announcements and updates throughout the term.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Study Resources Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Password for Class 2 (CHANGE THIS!)
+        const CLASS_PASSWORD = 'class2pass';
+        
+        // Check if already unlocked in this session
+        if (sessionStorage.getItem('class2Unlocked') === 'true') {
+            unlockContent();
+        }
+
+        function checkPassword(event) {
+            event.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (password === CLASS_PASSWORD) {
+                sessionStorage.setItem('class2Unlocked', 'true');
+                unlockContent();
+            } else {
+                errorMessage.classList.add('show');
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function unlockContent() {
+            document.getElementById('passwordSection').style.display = 'none';
+            document.getElementById('protectedContent').classList.add('unlocked');
+        }
+    </script>
+</body>
+</html>
